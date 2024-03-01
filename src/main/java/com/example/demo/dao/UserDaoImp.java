@@ -1,0 +1,46 @@
+package com.example.demo.dao;
+
+import com.example.demo.models.User;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
+;
+import java.util.List;
+
+@Repository
+public class UserDaoImp implements UserDao{
+    @PersistenceContext
+    private EntityManager manager;
+
+    @Override
+    public List<User> readAllUsers() {
+        return manager.createQuery("from User", User.class).getResultList();
+    }
+    @Override
+    public void create(User user) {
+        manager.persist(user);
+    }
+
+    @Override
+    public User update(User user) {
+//        User existingUser = manager.find(User.class, id);
+         return manager.merge(user);
+    }
+//        if (existingUser != null) {
+//            // Обновляем существующего пользователя в базе данных
+//            return manager.merge(existingUser);
+//        }
+//        return null;
+//    }
+
+    @Override
+    public User findUser(Long id) {
+        return manager.find(User.class, id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        User user = manager.find(User.class, id);
+        manager.remove(user);
+    }
+}
