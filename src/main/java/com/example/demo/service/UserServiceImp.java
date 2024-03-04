@@ -15,7 +15,6 @@ public class UserServiceImp implements UserService{
         this.userDao = userDao;
     }
     @Override
-    @Transactional
     public List<User> readAllUsers() {
         return userDao.readAllUsers();
     }

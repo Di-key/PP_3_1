@@ -4,7 +4,7 @@ import com.example.demo.models.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
-;
+
 import java.util.List;
 
 @Repository
@@ -23,15 +23,10 @@ public class UserDaoImp implements UserDao{
 
     @Override
     public User update(User user) {
-//        User existingUser = manager.find(User.class, id);
+
          return manager.merge(user);
     }
-//        if (existingUser != null) {
-//            // Обновляем существующего пользователя в базе данных
-//            return manager.merge(existingUser);
-//        }
-//        return null;
-//    }
+
 
     @Override
     public User findUser(Long id) {
